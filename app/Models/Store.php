@@ -23,4 +23,8 @@ class Store extends Model
     {
         return 'slug';
     }
+    public function productos()
+    {
+        return $this->hasMany(Productos_Tienda::class);
+    }
 }
