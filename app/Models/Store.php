@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Productos_Tienda;
 
 class Store extends Model
 {
@@ -25,6 +27,6 @@ class Store extends Model
     }
     public function productos()
     {
-        return $this->hasMany(Productos_Tienda::class);
+    return $this->hasMany(Productos_Tienda::class, 'store_id');
     }
 }

@@ -40,7 +40,11 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse($stores as $store)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $store->Nombre_Tienda }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                <a href="{{ route('stores.show', $store->slug) }}" class="text-blue-600 hover:underline">
+                                    {{ $store->Nombre_Tienda }}
+                                </a>
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $store->Direccion }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $store->Telefono ?? 'N/A' }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $store->Email ?? 'N/A' }}</td>
@@ -50,14 +54,15 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="{{ route('stores.show', $store->slug) }}" class="text-emerald-600 hover:text-emerald-900 mr-3">Productos</a>
                                 <a href="{{ route('stores.edit', $store->slug) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Editar</a>
                                 <form action="{{ route('stores.destroy', $store->slug) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:text-red-900 ml-2" onclick="return confirm('¿Estás seguro de que deseas eliminar esta tienda?')">
-                                    Eliminar
+                                        Eliminar
                                     </button>
-                                    </form>
+                                </form>
                             </td>
                         </tr>
                     @empty

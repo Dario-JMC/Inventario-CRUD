@@ -1,26 +1,26 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+namespace App\Models;
 
-return new class extends Migration
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Producto_Tienda extends Model
 {
-    public function up(): void
-    {
-        Schema::create('Productos__tiendas', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
-            $table->string('nombre', 120);
-            $table->decimal('precio', 10, 2)->default(0);
-            $table->integer('stock')->default(0);
-            $table->boolean('activo')->default(true);
-            $table->timestamps();
-        });
-    }
+    use HasFactory;
 
-    public function down(): void
+    protected $table = 'Productos__tiendas';
+
+    protected $fillable = [
+        'store_id',
+        'nombre',
+        'precio',
+        'stock',
+        'activo',
+    ];
+
+    public function store()
     {
-        Schema::dropIfExists('Productos__tiendas');
+        return $this->belongsTo(Store::class, 'store_id');
     }
-};
+}
